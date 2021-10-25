@@ -1,0 +1,62 @@
+package sqrt;
+
+// LC 303
+
+import java.util.Arrays;
+
+public class NumArray {
+    private int[] data, blocks;
+    private int N; // ÔªËØ¿‚”µ
+    private int B; // Ã¿½MÔªËØ‚€”µ
+    private int Bn; // ½M”µ
+    public NumArray(int[] nums) {
+        N = nums.length;
+        if(N == 0) {
+            return;
+        }
+        B = (int)Math.sqrt(N);
+        Bn = N / B + (N % B > 0 ? 1 : 0);
+
+        data = Arrays.copyOf(nums, N);
+
+        blocks = new int[Bn];
+        for(int i = 0; i < N; i++) {
+            blocks[i / B] += nums[i];
+        }
+    }
+
+    public int sumRange(int x, int y) {
+        if(x < 0 || x >= N || y < 0 || y >= N || x > y) {
+            return 0;
+        }
+        int bStart = x / B, bEnd = y / B;
+
+        int res = 0;
+        if(bStart == bEnd) {
+            for(int i = x; i <= y; i++) {
+                res += data[i];
+            }
+            return res;
+        }
+        for(int i = x; i < (bStart + 1) * B; i++) {
+            res += data[i];
+        }
+        for (int b = bStart + 1; b < bEnd; b++) {
+            res += blocks[b];
+        }
+
+        for(int i = bEnd * B; i <= y; i++) {
+            res += data[i];
+        }
+        return res;
+    }
+    public void update(int i, int val) {
+        if(i < 0 || i >= N) {
+            return;
+        }
+        int b = i / B;
+        blocks[b] -= data[i];
+        blocks[b] += val;
+        data[i] = val;
+    }
+}
