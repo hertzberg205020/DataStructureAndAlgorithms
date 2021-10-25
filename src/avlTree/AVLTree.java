@@ -105,7 +105,7 @@ public class AVLTree<K extends Comparable<K>, V> {
         x.height = Math.max(getHeight(x.left), getHeight(x.right)) + 1;
         return x;
     }
-    // 对节点y进行向左旋转操作，返回旋转后新的根节点x
+    // 對節點y進行左旋轉操作，返回旋轉後新的根結點x
     //    y                             x
     //  /  \                          /   \
     // T1   x      向左旋转 (y)       y     z
