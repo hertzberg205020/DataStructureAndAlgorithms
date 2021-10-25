@@ -59,4 +59,8 @@ public class NumArray {
         blocks[b] += val;
         data[i] = val;
     }
+
+    public static void main(String[] args) {
+
+    }
 }
