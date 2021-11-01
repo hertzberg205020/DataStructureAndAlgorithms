@@ -4,7 +4,9 @@ import bubbleSort.BubbleSort;
 import heap.HeapSort;
 import insertionSortImplement.InsertionSort;
 import insertionSortImplement.InsertionSortPractice;
+import lsd.BucketSort;
 import lsd.LSDSort;
+import lsd.MSDSort;
 import mergeSort.MergeSort;
 import quickSort.QuickSort;
 import selectSortImplement.SelectionSort;
@@ -69,6 +71,12 @@ public class SortHelper {
                 throw new IllegalArgumentException("Arr can not be empty.");
             }
             LSDSort.sort(strArray, strArray[0].length());
+        } else if (sortType.equals("MSDSort")) {
+            String[] strArr = (String[]) arr;
+            MSDSort.sort(strArr);
+        } else if(sortType.equals("BucketSort")) {
+            Integer[] intArr = (Integer[]) arr;
+            BucketSort.sort(intArr, 200);
         }
 
         long endTime = System.nanoTime();

@@ -51,13 +51,30 @@ public class ArrayGenerator {
         }
         return data;
     }
-    public static String[] generateRandomStringArray(int n, int w) {
+    public static String[] generateRandomSamelengthStringArray(int n, int w) {
         // https://www.ascii-code.com/
         // 33-126 可打印字元
         String[] arr = new String[n];
         Random rnd = new Random();
         for(int i = 0; i < n; i++) {
             StringBuilder sb = new StringBuilder();
+            for(int j = 0; j < w; j++) {
+                char c = (char) (rnd.nextInt(126 - 33 + 1) + 33);
+                sb.append(c);
+            }
+            arr[i] = sb.toString();
+        }
+        return arr;
+    }
+
+    public static String[] generateRandomStringArray(int n, int bound) {
+        // https://www.ascii-code.com/
+        // 33-126 可打印字元
+        String[] arr = new String[n];
+        Random rnd = new Random();
+        for(int i = 0; i < n; i++) {
+            StringBuilder sb = new StringBuilder();
+            int w = rnd.nextInt(bound);
             for(int j = 0; j < w; j++) {
                 char c = (char) (rnd.nextInt(126 - 33 + 1) + 33);
                 sb.append(c);

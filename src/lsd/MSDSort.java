@@ -3,19 +3,19 @@ package lsd;
 public class MSDSort {
     private MSDSort() {}
     public static void sort(String[] arr) {
-        sort(arr, 0, arr.length - 1, 0);
+        String[] temp = new String[arr.length];
+        sort(arr, 0, arr.length - 1, 0, temp);
     }
 
     // 根據r位置的字元，處理arr[left, right]
 
-    private static void sort(String[] arr, int left, int right, int r) {
+    private static void sort(String[] arr, int left, int right, int r, String[] temp) {
         if(left >= right) {
             return;
         }
         int R = 256; // ascii
         int[] cnt = new int[R + 1]; // 多紀錄無字元，0~256
         int[] index = new int[R + 2];
-        String[] temp = new String[right - left + 1];
 
         for(int i = left; i <= right; i++) {
             cnt[r >= arr[i].length() ? 0 : (arr[i].charAt(r) + 1)]++;
@@ -27,16 +27,16 @@ public class MSDSort {
 
         for(int i = left; i <= right; i++) {
             int p = r >= arr[i].length() ? 0 : (arr[i].charAt(r) + 1);
-            temp[index[p]] = arr[i];
+            temp[index[p] + left] = arr[i];
             index[p]++;
         }
 
         for(int i = left; i <= right; i++) {
-            arr[i] = temp[i - left];
+            arr[i] = temp[i];
         }
         // 遞歸下去
         for(int i = 0; i < R; i++) {
-            sort(arr, left + index[i], left + index[i + 1] - 1, r + 1);
+            sort(arr, left + index[i], left + index[i + 1] - 1, r + 1, temp);
         }
     }
 
