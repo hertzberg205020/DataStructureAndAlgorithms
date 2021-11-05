@@ -77,6 +77,9 @@ public class SortHelper {
         } else if(sortType.equals("BucketSort")) {
             Integer[] intArr = (Integer[]) arr;
             BucketSort.sort(intArr, 200);
+        } else if(sortType.equals("BucketSort2")) {
+            Integer[] intArr = (Integer[]) arr;
+            BucketSort.sort2(intArr, 100);
         }
 
         long endTime = System.nanoTime();

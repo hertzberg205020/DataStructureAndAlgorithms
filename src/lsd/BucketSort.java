@@ -3,6 +3,10 @@ package lsd;
 import sortTool.ArrayGenerator;
 import sortTool.SortHelper;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+
 public class BucketSort {
     private BucketSort() {}
     public static void sort(Integer[] arr, int B) {
@@ -48,9 +52,42 @@ public class BucketSort {
         }
     }
 
+    public static void sort2(Integer[] arr, int c) {
+        if(c <= 0) {
+            throw new IllegalArgumentException("c must be > 0");
+        }
+        int maxV = Integer.MIN_VALUE, minV = Integer.MAX_VALUE;
+        for(int e : arr) {
+            maxV = Math.max(maxV, e);
+            minV = Math.min(minV, e);
+        }
+        int range = maxV - minV + 1;
+        int B = range / c + (range % c > 0 ? 1 : 0);
+
+        LinkedList<Integer>[] buckets = new LinkedList[B];
+        for(int i = 0; i < B; i++) {
+            buckets[i] = new LinkedList<>();
+        }
+        for(int e : arr) {
+            buckets[(e - minV) / c].add(e);
+        }
+        for(int i = 0; i < B; i++) {
+            // O(n^2)級別的排序算法
+            Collections.sort(buckets[i]);
+        }
+        int index = 0;
+        for(int i = 0; i < B; i++) {
+            for(int e : buckets[i]) {
+                arr[index++] = e;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         int n = 1000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
+        Integer[] arr2 = Arrays.copyOf(arr, arr.length);
         SortHelper.sortTest("BucketSort", arr);
+        SortHelper.sortTest("BucketSort2", arr2);
     }
 }

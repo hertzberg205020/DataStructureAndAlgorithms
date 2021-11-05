@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class MaxSQRT {
     private int[] data, blocks;
-    private int N;  // ¤¸¯ÀÁ`¼Æ
-    private int B; // ¨C²Õ¤¸¯À¤¸¯À­Ó¼Æ
-    private int Bn; // ²Õ¼Æ
+    private int N;  // å…ƒç´ ç¸½æ•¸
+    private int B; // æ¯çµ„å…ƒç´ å…ƒç´ å€‹æ•¸
+    private int Bn; // çµ„æ•¸
     public MaxSQRT(int[] nums) {
         N = nums.length;
         if(N == 0) {
