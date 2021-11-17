@@ -37,8 +37,8 @@ public class WordDictionary {
         return match(root, word, 0);
     }
     private boolean match(Node node, String word, int index) {
-        // nextê‡ÁĞÖĞÓĞ¿ÉÄÜnext[i] == null
-        // ÔÚ'.'Ä£ºıÆ¥Åäß^³ÌÖĞ•ş³ö¬F¿ÕÖ¸á˜®³£
+        // nexté™£åˆ—ä¸­æœ‰å¯èƒ½next[i] == null
+        // åœ¨'.'æ¨¡ç³ŠåŒ¹é…éç¨‹ä¸­æœƒå‡ºç¾ç©ºæŒ‡é‡ç•°å¸¸
         if (node == null) {
             return false;
         }

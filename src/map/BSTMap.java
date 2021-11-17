@@ -34,14 +34,14 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         return size == 0;
     }
 
-    // Ïò¶ş·ÖËÑË÷Ê÷ÖĞÌí¼ÓĞÂµÄÔªËØ(key, value)
+    // å‘äºŒåˆ†æœç´¢æ¨¹ä¸­æ·»åŠ æ–°å…ƒç´ (key, value)
     @Override
     public void add(K key, V value){
         root = add(root, key, value);
     }
 
-    // ÏòÒÔnodeÎª¸ùµÄ¶ş·ÖËÑË÷Ê÷ÖĞ²åÈëÔªËØ(key, value)£¬µİ¹éËã·¨
-    // ·µ»Ø²åÈëĞÂ½Úµãºó¶ş·ÖËÑË÷Ê÷µÄ¸ù
+    // å‘ä»¥nodeç‚ºæ ¹çš„äºŒåˆ†æœç´¢æ¨¹ä¸­æ’å…¥å…ƒç´ (key, value)ï¼Œéæ­¸ç®—æ³•
+    // è¿”å›æ’å…¥æ–°ç¯€é»å¾ŒäºŒåˆ†æœç´¢æ¨¹çš„æ ¹
     private Node add(Node node, K key, V value){
 
         if(node == null){
@@ -59,7 +59,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         return node;
     }
 
-    // ·µ»ØÒÔnodeÎª¸ù½ÚµãµÄ¶ş·ÖËÑË÷Ê÷ÖĞ£¬keyËùÔÚµÄ½Úµã
+    // è¿”å›ä»¥nodeç‚ºæ ¹çµé»çš„äºŒåˆ†æœç´¢æ¨¹ä¸­ï¼Œkeyæ‰€åœ¨çš„ç¯€é»
     private Node getNode(Node node, K key){
 
         if(node == null)
@@ -94,15 +94,15 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         node.value = newValue;
     }
 
-    // ·µ»ØÒÔnodeÎª¸ùµÄ¶ş·ÖËÑË÷Ê÷µÄ×îĞ¡ÖµËùÔÚµÄ½Úµã
+    // è¿”å›ä»¥nodeç‚ºæ ¹çš„äºŒåˆ†æœç´¢æ¨¹çš„æœ€å°å€¼æ‰€åœ¨çš„ç¯€é»
     private Node minimum(Node node){
         if(node.left == null)
             return node;
         return minimum(node.left);
     }
 
-    // É¾³ıµôÒÔnodeÎª¸ùµÄ¶ş·ÖËÑË÷Ê÷ÖĞµÄ×îĞ¡½Úµã
-    // ·µ»ØÉ¾³ı½ÚµãºóĞÂµÄ¶ş·ÖËÑË÷Ê÷µÄ¸ù
+    // åˆªé™¤æ‰ä»¥nodeç‚ºæ ¹çš„äºŒåˆ†æœç´¢æ¨¹ä¸­çš„æœ€å°ç¯€é»
+    // è¿”å›åˆªé™¤ç¯€é»å¾Œæ–°çš„äºŒæœç´¢æ¨¹çš„æ ¹
     private Node removeMin(Node node){
 
         if(node.left == null){
@@ -116,7 +116,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         return node;
     }
 
-    // ´Ó¶ş·ÖËÑË÷Ê÷ÖĞÉ¾³ı¼üÎªkeyµÄ½Úµã
+    // å¾äºŒåˆ†æœç´¢æ¨¹ä¸­åˆªé™¤éµç‚ºkeyçš„ç¯€é»
     @Override
     public V remove(K key){
 
@@ -143,7 +143,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         }
         else{   // key.compareTo(node.key) == 0
 
-            // ´ıÉ¾³ı½Úµã×ó×ÓÊ÷Îª¿ÕµÄÇé¿ö
+            // å¾…åˆªé™¤ç¯€é»å·¦å­æ¨¹ç‚ºç©ºçš„æƒ…æ³
             if(node.left == null){
                 Node rightNode = node.right;
                 node.right = null;
@@ -151,7 +151,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
                 return rightNode;
             }
 
-            // ´ıÉ¾³ı½ÚµãÓÒ×ÓÊ÷Îª¿ÕµÄÇé¿ö
+            // å¾…åˆªé™¤ç¯€é»å³å­æ¨¹ç‚ºç©ºçš„æƒ…æ³
             if(node.right == null){
                 Node leftNode = node.left;
                 node.left = null;
@@ -159,10 +159,10 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
                 return leftNode;
             }
 
-            // ´ıÉ¾³ı½Úµã×óÓÒ×ÓÊ÷¾ù²»Îª¿ÕµÄÇé¿ö
+            // å¾…åˆªé™¤ç¯€é»å·¦å³å­æ¨¹å‡ä¸ç‚ºç©ºçš„æƒ…æ³
 
-            // ÕÒµ½±È´ıÉ¾³ı½Úµã´óµÄ×îĞ¡½Úµã, ¼´´ıÉ¾³ı½ÚµãÓÒ×ÓÊ÷µÄ×îĞ¡½Úµã
-            // ÓÃÕâ¸ö½Úµã¶¥Ìæ´ıÉ¾³ı½ÚµãµÄÎ»ÖÃ
+            // æ‰¾åˆ°æ¯”å¾…åˆªé™¤ç¯€é»å¤§çš„æœ€å°ç¯€é»ï¼Œç¯€å¾…åˆªé™¤ç¯€é»å³å­æ¨¹çš„æœ€å°ç¯€é»
+            // ç”¨é€™å€‹ç¯€é»é ‚æ›¿å¾…åˆªé™¤ç¯€é»çš„ä½ç½®
             Node successor = minimum(node.right);
             successor.right = removeMin(node.right);
             successor.left = node.left;

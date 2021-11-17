@@ -19,7 +19,7 @@ public class RBTree<K extends Comparable<? super K>, V> {
             this.value = value;
             left = null;
             right = null;
-            color = RED; // ÔÚ 2-3˜äÖĞ£¬ĞÂÌí¼ÓµÄ¹ücÒ»¶¨ÒªÏÈÅcÈ~×Ó¹ücÈÚºÏ£¬ĞÎ³É3¹üc»òÅR•rµÄ4¹üc
+            color = RED; // åœ¨2-3æ¨¹ä¸­ï¼Œæ–°æ·»åŠ çš„ç¯€é»ä¸€å®šè¦å…ˆèˆ‡è‘‰å­ç¯€é»èåˆï¼Œå½¢æˆ3ç¯€é»æˆ–è‡¨æ™‚çš„4ç¯€é»
         }
     }
     private Node root;
@@ -38,7 +38,7 @@ public class RBTree<K extends Comparable<? super K>, V> {
         return size == 0;
     }
 
-    // ÅĞ”à¹ücnodeµÄîÉ«
+    // åˆ¤æ–·ç¯€é»nodeçš„é¡è‰²
     private boolean isRed(Node node) {
         if(node == null)
             return BLACK;
@@ -46,7 +46,7 @@ public class RBTree<K extends Comparable<? super K>, V> {
     }
 
     //   node                     x
-    //  /   \     ×óĞı×ª         /  \
+    //  /   \      å·¦æ—‹è½‰        /  \
     // T1   x   --------->   node   T3
     //     / \              /   \
     //    T2 T3            T1   T2
@@ -64,7 +64,7 @@ public class RBTree<K extends Comparable<? super K>, V> {
     }
 
     //     node                   x
-    //    /   \     ÓÒĞı×ª       /  \
+    //    /   \     å³æ—‹è½‰       /  \
     //   x    T2   ------->   y   node
     //  / \                       /  \
     // y  T1                     T1  T2
@@ -75,26 +75,26 @@ public class RBTree<K extends Comparable<? super K>, V> {
         x.right = node;
 
         x.color = node.color;
-        node.color = RED; // ÅR•rµÄ4¹üc
+        node.color = RED; // è‡¨æ™‚çš„4ç¯€é»
 
         return x;
     }
 
-    // îÉ«·­ŞD
+    // é¡è‰²ç¿»è½‰
     private void flipColors(Node node) {
         node.color = RED;
         node.left.color = BLACK;
         node.right.color = BLACK;
     }
 
-    // Ïò¼tºÚ˜äÖĞÌí¼ÓĞÂµÄÔªËØ(key, value)
+    // å‘ç´…é»‘æ¨¹ä¸­æ·»åŠ æ–°çš„å…ƒç´ (key, value)
     public void add(K key, V value){
         root = add(root, key, value);
-        root.color = BLACK; // ×î½KµÄ¸ù½YücéºÚÉ«µÄ¹üc
+        root.color = BLACK; // æœ€çµ‚çš„æ ¹çµé»ç‚ºé»‘è‰²çš„ç¯€é»
     }
 
-    // ÏòÒÔnodeÎª¸ùµÄ¼tºÚ˜äÖĞ²åÈëÔªËØ(key, value)£¬µİ¹éËã·¨
-    // ·µ»Ø²åÈëĞÂ½Úµãºó¼tºÚ˜äµÄ¸ù
+    // å‘ä»¥nodeç‚ºæ ¹çš„ç´…é»‘æ¨¹ä¸­æ’å…¥å…ƒç´ (key, value)ï¼Œéæ­¸ç®—æ³•
+    // è¿”å›æ’å…¥æ–°é»å¾Œç´…é»‘æ¨¹çš„æ ¹
     private Node add(Node node, K key, V value){
 
         if(node == null){
@@ -109,7 +109,7 @@ public class RBTree<K extends Comparable<? super K>, V> {
         else // key.compareTo(node.key) == 0
             node.value = value;
 
-        // ¾S×o¼tºÚ˜äµÄĞÔÙ|
+        // ç¶­è­·ç´…é»‘æ¨¹çš„æ€§è³ª
         if(isRed(node.right) && !isRed(node.left))
             node = leftRotate(node);
 
@@ -122,7 +122,7 @@ public class RBTree<K extends Comparable<? super K>, V> {
         return node;
     }
 
-    // ·µ»ØÒÔnodeÎª¸ù½ÚµãµÄ¶ş·ÖËÑË÷Ê÷ÖĞ£¬keyËùÔÚµÄ½Úµã
+    // è¿”å›ä»¥nodeç‚ºæ ¹ç¯€é»çš„äºŒåˆ†æœç´¢æ¨¹ä¸­ï¼Œkeyæ‰€åœ¨çš„ç¯€é»
     private Node getNode(Node node, K key){
 
         if(node == null)
@@ -154,15 +154,15 @@ public class RBTree<K extends Comparable<? super K>, V> {
         node.value = newValue;
     }
 
-    // ·µ»ØÒÔnodeÎª¸ùµÄ¶ş·ÖËÑË÷Ê÷µÄ×îĞ¡ÖµËùÔÚµÄ½Úµã
+    // è¿”å›ä»¥nodeç‚ºæ ¹çš„äºŒåˆ†æœç´¢æ¨¹çš„æœ€å°å€¼æ‰€åœ¨çš„ç¯€é»
     private Node minimum(Node node){
         if(node.left == null)
             return node;
         return minimum(node.left);
     }
 
-    // É¾³ıµôÒÔnodeÎª¸ùµÄ¶ş·ÖËÑË÷Ê÷ÖĞµÄ×îĞ¡½Úµã
-    // ·µ»ØÉ¾³ı½ÚµãºóĞÂµÄ¶ş·ÖËÑË÷Ê÷µÄ¸ù
+    // åˆªé™¤æ‰ä»¥nodeç‚ºæ ¹çš„äºŒåˆ†æœç´¢æ¨¹ä¸­çš„æœ€å°ç¯€é»
+    // è¿”å›åˆªé™¤ç¯€é»å¾Œæ–°çš„äºŒåˆ†æœç´¢æ¨¹çš„æ ¹
     private Node removeMin(Node node){
 
         if(node.left == null){
@@ -176,7 +176,7 @@ public class RBTree<K extends Comparable<? super K>, V> {
         return node;
     }
 
-    // ´Ó¶ş·ÖËÑË÷Ê÷ÖĞÉ¾³ı¼üÎªkeyµÄ½Úµã
+    // å¾äºŒåˆ†æœç´¢æ¨¹ä¸­åˆªé™¤éµç‚ºkeyçš„ç¯€é»
     public V remove(K key){
 
         Node node = getNode(root, key);
@@ -202,7 +202,7 @@ public class RBTree<K extends Comparable<? super K>, V> {
         }
         else{   // key.compareTo(node.key) == 0
 
-            // ´ıÉ¾³ı½Úµã×ó×ÓÊ÷Îª¿ÕµÄÇé¿ö
+            // å¾…åˆªé™¤ç¯€é»å·¦å­æ¨¹ç‚ºç©ºçš„æƒ…æ³
             if(node.left == null){
                 Node rightNode = node.right;
                 node.right = null;
@@ -210,7 +210,7 @@ public class RBTree<K extends Comparable<? super K>, V> {
                 return rightNode;
             }
 
-            // ´ıÉ¾³ı½ÚµãÓÒ×ÓÊ÷Îª¿ÕµÄÇé¿ö
+            // å¾…åˆªé™¤ç¯€é»å³å­æ¨¹ç‚ºç©ºçš„æƒ…æ³
             if(node.right == null){
                 Node leftNode = node.left;
                 node.left = null;
@@ -218,10 +218,10 @@ public class RBTree<K extends Comparable<? super K>, V> {
                 return leftNode;
             }
 
-            // ´ıÉ¾³ı½Úµã×óÓÒ×ÓÊ÷¾ù²»Îª¿ÕµÄÇé¿ö
+            // å¾…åˆªé™¤ç¯€é»å·¦å³å­æ¨¹å‡ä¸ç‚ºç©ºçš„æƒ…æ³
 
-            // ÕÒµ½±È´ıÉ¾³ı½Úµã´óµÄ×îĞ¡½Úµã, ¼´´ıÉ¾³ı½ÚµãÓÒ×ÓÊ÷µÄ×îĞ¡½Úµã
-            // ÓÃÕâ¸ö½Úµã¶¥Ìæ´ıÉ¾³ı½ÚµãµÄÎ»ÖÃ
+            // æ‰¾åˆ°æ¯”å¾…åˆªé™¤ç¯€é»å¤§çš„æœ€å°ç¯€é»ï¼Œå³å¾…åˆªé™¤ç¯€é»å³å­æ¨¹çš„æœ€å°ç¯€é»
+            // ç”¨æ­¤ç¯€é»é ‚æ›¿å¾…åˆªé™¤ç¯€é»çš„ä½ç½®
             Node successor = minimum(node.right);
             successor.right = removeMin(node.right);
             successor.left = node.left;

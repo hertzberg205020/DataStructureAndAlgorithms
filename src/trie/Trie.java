@@ -64,8 +64,8 @@ public class Trie {
     public void remove(String word) {
         root = remove(root, word, 0);
     }
-    // „h³ıtrieÖĞµÄword×Ö´®
-    // ·µ»Ø„h³ıword×Ö´®áá£¬trieµÄ¸ù½Yüc
+    // åˆªé™¤trieä¸­çš„wordå­—ä¸²
+    // è¿”å›åˆªé™¤wordå­—ä¸²å¾Œï¼Œtrieçš„æ ¹çµé»
     private Node remove(Node node, String word, int index) {
         if (index == word.length()) {
             if(node.isWord) {
@@ -75,10 +75,10 @@ public class Trie {
             return (node.next.size() == 0) ? null : node;
         }
         char c = word.charAt(index);
-        // ÏÈ„h¹üc
-        // ½Ó×¡„h³ı¹ücááµÄ×ƒ»¯trie
+        // å…ˆåˆªç¯€é»
+        // æ¥ä½åˆªé™¤ç¯€é»å¾Œçš„è®ŠåŒ–trie
         node.next.put(c, remove(node.next.get(c), word, index+1));
-        // ¼ÙÈç·µ»Ø¹ücé¿ÕÖµ£¬„t„h³ıÖ¸Ïò
+        // å‡å¦‚è¿”å›ç¯€é»ç‚ºç©ºå€¼ï¼Œå‰‡åˆªé™¤æŒ‡å‘
         if (node.next.get(c) == null) {
             node.next.remove(c);
         }

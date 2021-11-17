@@ -37,20 +37,20 @@ public class AVLTree<K extends Comparable<K>, V> {
         return size == 0;
     }
 
-    // »ñµÃ½ÚµãnodeµÄ¸ß¶È
+    // ç²å¾—ç¯€é»nodeçš„é«˜åº¦
     private int getHeight(Node node){
         if(node == null)
             return 0;
         return node.height;
     }
 
-    // »ñµÃ½ÚµãnodeµÄÆ½ºâÒò×Ó
+    // å–å¾—nodeçš„å¹³è¡¡å› å­
     private int getBalanceFactor(Node node){
         if(node == null)
             return 0;
         return getHeight(node.left) - getHeight(node.right);
     }
-    // ÅĞ”àÔ“¶ş²æ˜äÊÇ·ñéÒ»¿Ã¶ş·ÖËÑË÷˜ä
+    // åˆ¤æ–·è©²äºŒå‰æ¨¹æ˜¯å¦ç‚ºä¸€æ£µäºŒåˆ†æœç´¢æ•¸
     public boolean isBST() {
         ArrayList<K> keys = new ArrayList<>();
         inOrder(root, keys);
@@ -81,34 +81,34 @@ public class AVLTree<K extends Comparable<K>, V> {
         }
         return isBalanced(node.left) && isBalanced(node.right);
     }
-    // ¶Ô½Úµãy½øĞĞÏòÓÒĞı×ª²Ù×÷£¬·µ»ØĞı×ªºóĞÂµÄ¸ù½Úµãx
+    // å°ç¯€é»yé€²è¡Œå‘å³æ—‹è½‰æ“ä½œï¼Œè¿”å›æ—‹è½‰å¾Œçš„æ–°çš„æ ¹çµé»x
     //        y                              x
     //       / \                           /   \
-    //      x   T4     ÏòÓÒĞı×ª (y)        z     y
+    //      x   T4   å‘å³é¸è½‰(y)            z     y
     //     / \       - - - - - - - ->    / \   / \
     //    z   T3                       T1  T2 T3 T4
     //   / \
     // T1   T2
     private Node rightRotate(Node y) {
         Node x = y.left;
-        // T3×ƒ”µ¿ÉÒÔÊ¡ÂÔ
+        // T3è®Šæ•¸å¯çœç•¥
         // y.left = x.right;
         // x.right = y;
         Node T3 = x.right;
 
-        // ÏòÓÒĞıŞDß^³Ì
+        // å‘å³é¸è½‰éç¨‹
         x.right = y;
         y.left = T3;
 
-        // ¸üĞÂheight
+        // æ›´æ–°height
         y.height = Math.max(getHeight(y.left), getHeight(y.right)) + 1;
         x.height = Math.max(getHeight(x.left), getHeight(x.right)) + 1;
         return x;
     }
-    // Œ¦¹ücyßMĞĞ×óĞıŞD²Ù×÷£¬·µ»ØĞıŞDááĞÂµÄ¸ù½Yücx
+    // å°ç¯€é»yé€²è¡Œå·¦æ—‹è½‰æ“ä½œï¼Œè¿”å›æ—‹è½‰å¾Œæ–°çš„æ ¹çµé»x
     //    y                             x
     //  /  \                          /   \
-    // T1   x      Ïò×óĞı×ª (y)       y     z
+    // T1   x     å‘å·¦æ—‹è½‰(y)          y     z
     //     / \   - - - - - - - ->   / \   / \
     //   T2  z                     T1 T2 T3 T4
     //      / \
@@ -117,24 +117,24 @@ public class AVLTree<K extends Comparable<K>, V> {
         Node x = y.right;
         Node T2 = x.left;
 
-        // Ïò×óĞıŞD
+        // å‘å·¦æ—‹è½‰
         x.left = y;
         y.right = T2;
 
-        // ¸üĞÂheight
+        // æ›´æ–°height
         y.height = Math.max(getHeight(y.left), getHeight(y.right)) + 1;
         x.height = Math.max(getHeight(x.left), getHeight(x.right)) + 1;
         return x;
     }
 
 
-    // Ïò¶ş·ÖËÑË÷Ê÷ÖĞÌí¼ÓĞÂµÄÔªËØ(key, value)
+    // å‘äºŒåˆ†æœç´¢æ¨¹ä¸­æ·»åŠ æ–°çš„å…ƒç´ (key, value)
     public void add(K key, V value){
         root = add(root, key, value);
     }
 
-    // ÏòÒÔnodeÎª¸ùµÄ¶ş·ÖËÑË÷Ê÷ÖĞ²åÈëÔªËØ(key, value)£¬µİ¹éËã·¨
-    // ·µ»Ø²åÈëĞÂ½Úµãºó¶ş·ÖËÑË÷Ê÷µÄ¸ù
+    // å‘ä»¥nodeç‚ºæ ¹çš„äºŒåˆ†æœç´¢æ¨¹ä¸­æ’å…¥å…ƒç´ (key, value)ï¼Œéæ­¸åŒ´æ³•
+    // è¿”å›æ’å…¥æ–°çµé»å¾ŒäºŒåˆ†æœç´¢æ¨¹çš„æ ¹
     private Node add(Node node, K key, V value){
 
         if(node == null){
@@ -149,16 +149,16 @@ public class AVLTree<K extends Comparable<K>, V> {
         else // key.compareTo(node.key) == 0
             node.value = value;
 
-        // ¸üĞÂheight
+        // æ›´æ–°height
         node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
 
-        // ¼ÆËãÆ½ºâÒò×Ó
+        // è¨ˆç®—å¹³è¡¡å› å­
         int balanceFactor = getBalanceFactor(node);
 
 //        if(Math.abs(balanceFactor) > 1)
 //            System.out.println("unbalanced : " + balanceFactor);
 
-        // Æ½ºâ¾S×o
+        // å¹³è¡¡ç¶­è­·
 
         // LL
         if(balanceFactor > 1 && getBalanceFactor(node.left) >= 0) {
@@ -182,7 +182,7 @@ public class AVLTree<K extends Comparable<K>, V> {
         return node;
     }
 
-    // ·µ»ØÒÔnodeÎª¸ù½ÚµãµÄ¶ş·ÖËÑË÷Ê÷ÖĞ£¬keyËùÔÚµÄ½Úµã
+    // è¿”å›ä»¥nodeç‚ºæ ¹çµé»çš„äºŒåˆ†æœç´¢æ¨¹ä¸­ï¼Œkeyæ‰€åœ¨çš„ç¯€é»
     private Node getNode(Node node, K key){
 
         if(node == null)
@@ -214,15 +214,15 @@ public class AVLTree<K extends Comparable<K>, V> {
         node.value = newValue;
     }
 
-    // ·µ»ØÒÔnodeÎª¸ùµÄ¶ş·ÖËÑË÷Ê÷µÄ×îĞ¡ÖµËùÔÚµÄ½Úµã
+    // è¿”å›ä»¥nodeç‚ºæ ¹çš„äºŒåˆ†æœç´¢æ¨¹çš„æœ€å°å€¼æ‰€åœ¨çš„ç¯€é»
     private Node minimum(Node node){
         if(node.left == null)
             return node;
         return minimum(node.left);
     }
 
-    // É¾³ıµôÒÔnodeÎª¸ùµÄ¶ş·ÖËÑË÷Ê÷ÖĞµÄ×îĞ¡½Úµã
-    // ·µ»ØÉ¾³ı½ÚµãºóĞÂµÄ¶ş·ÖËÑË÷Ê÷µÄ¸ù
+    // åˆªé™¤æ‰ä»¥nodeç‚ºæ ¹çš„äºŒåˆ†æœç´¢æ¨¹ä¸­çš„æœ€å°ç¯€é»
+    // è¿”å›åˆªé™¤ç¯€é»å¾Œæ–°çš„äºŒåˆ†æœç´¢æ¨¹çš„æ ¹
     private Node removeMin(Node node){
 
         if(node.left == null){
@@ -236,7 +236,7 @@ public class AVLTree<K extends Comparable<K>, V> {
         return node;
     }
 
-    // ´Ó¶ş·ÖËÑË÷Ê÷ÖĞÉ¾³ı¼üÎªkeyµÄ½Úµã
+    // å¾äºŒåˆ†æœç´¢æ¨¹ä¸­åˆªé™¤æ‰éµç‚ºkeyçš„ç¯€é»
     public V remove(K key){
 
         Node node = getNode(root, key);
@@ -251,7 +251,7 @@ public class AVLTree<K extends Comparable<K>, V> {
 
         if( node == null )
             return null;
-        // AVL treeÒª·µ»ØµÄ¸ù½Yüc±ØÀm±£×CÆäéÆ½ºâ¶ş²æ”µ
+        // AVL treeè¦è¿”å›çš„æ ¹çµé»å¿…é ˆä¿è­‰å…¶ç‚ºå¹³è¡¡äºŒå‰æ•¸
         Node retNode;
         if( key.compareTo(node.key) < 0 ){
             node.left = remove(node.left , key);
@@ -263,20 +263,20 @@ public class AVLTree<K extends Comparable<K>, V> {
         }
         else{   // key.compareTo(node.key) == 0
 
-            // ´ıÉ¾³ı½Úµã×ó×ÓÊ÷Îª¿ÕµÄÇé¿ö
+            // å¾…åˆªé™¤ç¯€é»çš„å·¦å­æ¨¹ç‚ºç©ºçš„æƒ…æ³
             if(node.left == null){
                 Node rightNode = node.right;
                 node.right = null;
                 size --;
                 retNode = rightNode;
-            }else if(node.right == null) { // ´ıÉ¾³ı½ÚµãÓÒ×ÓÊ÷Îª¿ÕµÄÇé¿ö
+            }else if(node.right == null) { // å¾…åˆªé™¤ç¯€é»å³å­æ¨¹ç‚ºç©ºçš„æƒ…æ³
                 Node leftNode = node.left;
                 node.left = null;
                 size --;
                 retNode = leftNode;
-            } else { // ´ıÉ¾³ı½Úµã×óÓÒ×ÓÊ÷¾ù²»Îª¿ÕµÄÇé¿ö
-                // ÕÒµ½±È´ıÉ¾³ı½Úµã´óµÄ×îĞ¡½Úµã, ¼´´ıÉ¾³ı½ÚµãÓÒ×ÓÊ÷µÄ×îĞ¡½Úµã
-                // ÓÃÕâ¸ö½Úµã¶¥Ìæ´ıÉ¾³ı½ÚµãµÄÎ»ÖÃ
+            } else { // å¾…åˆªé™¤ç¯€é»å·¦å³å­æ¨¹å‡ä¸ç‚ºç©ºçš„æƒ…æ³
+                // æ‰¾åˆ°æ¯”å¾…åˆªé™¤ç¯€é»å¤§çš„æœ€å°ç¯€é»ï¼Œå³å¾…åˆªé™¤ç¯€é»å³å­æ¨¹ä¸­çš„æœ€å°ç¯€é»
+                // ç”¨é€™å€‹ç¯€é»é ‚æ›¿å¾…åˆªé™¤ç¯€é»çš„ä½ç½®
                 Node successor = minimum(node.right);
                 successor.right = remove(node.right, successor.key);
                 successor.left = node.left;
@@ -288,10 +288,10 @@ public class AVLTree<K extends Comparable<K>, V> {
         if(retNode == null) {
             return null;
         }
-        // ¸üĞÂheight
+        // æ›´æ–°height
         retNode.height = Math.max(getHeight(retNode.left), getHeight(retNode.right)) + 1;
 
-        // Ó‹ËãÆ½ºâÒò×Ó
+        // è¨ˆç®—å¹³è¡¡å› å­
         int balanceFactor = getBalanceFactor(retNode);
 
         // LL
@@ -324,7 +324,7 @@ public class AVLTree<K extends Comparable<K>, V> {
         if(FileOperation.readFile("pride-and-prejudice.txt", words)) {
             System.out.println("Total words: " + words.size());
 
-            AVLTree<String, Integer> map = new AVLTree<>(); // packageÃû·QÅcclassÍ¬Ãû£¬ÓÃèÊ¯±íß_Ê½®‹ˆóåe
+            AVLTree<String, Integer> map = new AVLTree<>(); // packageåç¨±èˆ‡classåŒåï¼Œç”¨é‘½çŸ³è¡¨é”å¼æœƒå ±éŒ¯
             for (String word : words) {
                 if (map.contains(word))
                     map.set(word, map.get(word) + 1);

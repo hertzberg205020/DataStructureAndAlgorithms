@@ -15,7 +15,7 @@ public class Student {
 
     @Override
     public int hashCode() {
-        int B = 32; // 以32進位制實作
+        int B = 32; // 鎺＄敤32閫插埗
         int hash = 0;
         hash = hash * B + ((Integer)grade).hashCode();
         hash = hash * B + ((Integer)clazz).hashCode();

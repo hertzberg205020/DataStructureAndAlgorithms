@@ -41,7 +41,7 @@ public class ReverseAStringMain {
 
     public static void main(String[] args) {
         System.out.println(reverseAString3("Total"));
-        // StringBufferÖĞÓĞŒÀı·½·¨.reverse()£¬·­ŞD×Ö´®
+        // StringBufferä¸­æœ‰å¯¦ä¾‹æ–¹æ³•.reverse()ï¼Œç¿»è½‰å­—ä¸²
         String blogName = "java2blog";
         StringBuffer sb = new StringBuffer(blogName);
         System.out.println("Reverse of java2blog is: " + sb.reverse());

@@ -1,12 +1,12 @@
 package UnionFind;
 
 public class UnionFind5 implements UF{
-    private int[] parent; // parent[i]±íÊ¾Ò»ÔªËØËùÖ¸ÏòµÄ¸¸ÓH¹üc
-    private int[] rank; // rank[i]±íÊ¾ÒÔié¸ùµÄ¼¯ºÏËù±íÊ¾˜äµÄŒÓ”µ
+    private int[] parent; // parent[i]è¡¨ç¤ºä¸€å…ƒç´ æ‰€æŒ‡å‘çš„çˆ¶è¦ªç¯€é»
+    private int[] rank; // rank[i]è¡¨ç¤ºä»¥iç‚ºæ ¹çš„é›†åˆæ‰€è¡¨ç¤ºæ¨¹çš„å±¤æ•¸
     public UnionFind5(int size) {
         parent = new int[size];
         rank = new int[size];
-        // ³õÊ¼»¯Ã¿Ò»‚€parent[i]Ö¸Ïò×Ô¼º£¬±íÊ¾Ã¿Ò»‚€ÔªËØ×Ô¼º×Ô³ÉÒ»‚€¼¯ºÏ
+        // åˆå§‹åŒ–æ¯ä¸€å€‹parent[i]æŒ‡å‘è‡ªå·±ï¼Œè¡¨ç¤ºæ¯ä¸€å€‹å…ƒç´ è‡ªå·±è‡ªæˆä¸€å€‹é›†åˆ
         for(int i = 0; i < size; i++) {
             parent[i] = i;
             rank[i] = 1;
@@ -17,15 +17,15 @@ public class UnionFind5 implements UF{
     public int getSize() {
         return parent.length;
     }
-    // ²éÕÒß^³Ì£¬²éÔƒÔªËØpËùŒ¦‘ªµÄ¼¯ºÏ¾Ì–£¬¸ù½Yüc¾Ì–
-    // O(h)µÄÑ}ës¶È£¬hé˜äµÄ¸ß¶È
+    // æŸ¥æ‰¾éç¨‹ï¼ŒæŸ¥è©¢å…ƒç´ pæ‰€å°æ‡‰çš„é›†åˆç·¨è™Ÿï¼Œæ ¹çµé»ç·¨è™Ÿ
+    // O(h)çš„è¤‡é›œåº¦ï¼Œhç‚ºæ¨¹çš„é«˜åº¦
     private int find(int p) {
         if(p < 0 || p >= parent.length) {
             throw new IllegalArgumentException("p is out of bound.");
         }
 
-        // ²»”àÈ¥²éÕÒ×Ô¼ºµÄ¸¸ÓH¹üc£¬Ö±µ½¸ù½YücéÖ¹
-        // ¸ù½YücµÄÌØüc: parent[p] = p
+        // ä¸æ–·å»æŸ¥æ‰¾è‡ªå·±çš„çˆ¶è¦ªç¯€é»ï¼Œç›´åˆ°æ ¹çµé»ç‚ºæ­¢
+        // æ ¹çµé»çš„ç‰¹é»: parent[p] = p
         while (p != parent[p]) {
             parent[p] = parent[parent[p]];
             p = parent[p];
@@ -37,8 +37,8 @@ public class UnionFind5 implements UF{
         return find(p) == find(q);
     }
 
-    // ºÏãÔªËØpÅcÔªËØqËùŒÙµÄ¼¯ºÏ
-    // O(h)µÄÑ}ës¶È£¬hé˜äµÄ¸ß¶È
+    // åˆä½µå…ƒç´ pèˆ‡å…ƒç´ qæ‰€å±¬çš„é›†åˆ
+    // O(h)çš„è¤‡é›œåº¦ï¼Œhç‚ºæ¨¹çš„é«˜åº¦
     @Override
     public void unionElement(int p, int q) {
         int pRoot = find(p);
@@ -48,15 +48,15 @@ public class UnionFind5 implements UF{
             return;
         }
 
-        // ¸ù“ş2‚€ÔªËØËùÔÚ˜äµÄrank²»Í¬ÅĞ”àºÏãµÄ·½Ïò
-        // Œ¢rankµÍµÄ¼¯ºÏºÏãµ½rank¸ßµÄµÄ¼¯ºÏÉÏ
+        // æ ¹æ“š2å€‹å…ƒç´ æ‰€åœ¨æ¨¹çš„rankä¸åŒåˆ¤æ–·åˆä½µçš„æ–¹å‘
+        // å°‡rankä½çš„é›†åˆåˆä½µåˆ°ranké«˜çš„çš„é›†åˆä¸Š
         if (rank[pRoot] < rank[qRoot]) {
             parent[pRoot] = qRoot;
         } else if (rank[pRoot] > rank[qRoot]){
             parent[qRoot] = pRoot;
         } else { // rank[pRoot] == rank[qRoot]
             parent[pRoot] = qRoot;
-            rank[qRoot] += 1; // ´Ë•r£¬¾S×orankµÄÖµ
+            rank[qRoot] += 1; // æ­¤æ™‚ï¼Œç¶­è­·rankçš„å€¼
         }
     }
 }

@@ -1,13 +1,13 @@
 package UnionFind;
-// µÚ¶ş°æµÄUnion-Find
+// ç¬¬äºŒç‰ˆçš„Union-Find
 public class UnionFind2 implements UF {
-    // µÚ¶ş°æµÄUnion-Find£¬Ê¹ÓÃÒ»‚€”µ½M˜‹½¨Ò»¿ÃÖ¸Ïò¸¸ÓH¹ücµÄ˜ä
-    // parent[i]±íÊ¾Ò»ÔªËØËùÖ¸ÏòµÄ¸¸ÓH¹üc
+    // ç¬¬äºŒç‰ˆçš„Union-Findï¼Œä½¿ç”¨ä¸€å€‹æ•¸çµ„æ§‹å»ºä¸€æ£µæŒ‡å‘çˆ¶è¦ªç¯€é»çš„æ¨¹
+    // parent[i]è¡¨ç¤ºä¸€å…ƒç´ æ‰€æŒ‡å‘çš„çˆ¶è¦ªç¯€é»
     private int[] parent;
     public UnionFind2(int size) {
         parent = new int[size];
 
-        // ³õÊ¼»¯Ã¿Ò»‚€parent[i]Ö¸Ïò×Ô¼º£¬±íÊ¾Ã¿Ò»‚€ÔªËØ×Ô¼º×Ô³ÉÒ»‚€¼¯ºÏ
+        // åˆå§‹åŒ–æ¯ä¸€å€‹parent[i]æŒ‡å‘è‡ªå·±ï¼Œè¡¨ç¤ºæ¯ä¸€å€‹å…ƒç´ è‡ªå·±è‡ªæˆä¸€å€‹é›†åˆ
         for(int i = 0; i < size; i++) {
             parent[i] = i;
         }
@@ -17,15 +17,15 @@ public class UnionFind2 implements UF {
     public int getSize() {
         return parent.length;
     }
-    // ²éÕÒß^³Ì£¬²éÔƒÔªËØpËùŒ¦‘ªµÄ¼¯ºÏ¾Ì–£¬¸ù½Yüc¾Ì–
-    // O(h)µÄÑ}ës¶È£¬hé˜äµÄ¸ß¶È
+    // æŸ¥æ‰¾éç¨‹ï¼ŒæŸ¥è©¢å…ƒç´ pæ‰€å°æ‡‰çš„é›†åˆç·¨è™Ÿï¼Œæ ¹çµé»ç·¨è™Ÿ
+    // O(h)çš„è¤‡é›œåº¦ï¼Œhç‚ºæ¨¹çš„é«˜åº¦
     private int find(int p) {
         if(p < 0 || p >= parent.length) {
             throw new IllegalArgumentException("p is out of bound.");
         }
 
-        // ²»”àÈ¥²éÕÒ×Ô¼ºµÄ¸¸ÓH¹üc£¬Ö±µ½¸ù½YücéÖ¹
-        // ¸ù½YücµÄÌØüc: parent[p] = p
+        // ä¸æ–·å»æŸ¥æ‰¾è‡ªå·±çš„çˆ¶è¦ªç¯€é»ï¼Œç›´åˆ°æ ¹çµé»ç‚ºæ­¢
+        // æ ¹çµé»çš„ç‰¹é»: parent[p] = p
         while (p != parent[p]) {
             p = parent[p];
         }
@@ -36,8 +36,8 @@ public class UnionFind2 implements UF {
         return find(p) == find(q);
     }
 
-    // ºÏãÔªËØpÅcÔªËØqËùŒÙµÄ¼¯ºÏ
-    // O(h)µÄÑ}ës¶È£¬hé˜äµÄ¸ß¶È
+    // åˆä½µå…ƒç´ pèˆ‡å…ƒç´ qæ‰€å±¬çš„é›†åˆ
+    // O(h)çš„è¤‡é›œåº¦ï¼Œhç‚ºæ¨¹çš„é«˜åº¦
     @Override
     public void unionElement(int p, int q) {
         int pRoot = find(p);

@@ -3,7 +3,7 @@ package hashtable;
 import java.util.TreeMap;
 
 public class HashTable<K, V> {
-    // ¹şÏ£±íßmÓÃÙ|”µÁĞ±í
+    // å“ˆå¸Œè¡¨é©ç”¨è³ªæ•¸åˆ—è¡¨
     private final int[] capacity
             = {53, 97, 193, 389, 769, 1543, 3079, 6151, 12289, 24593,
             49157, 98317, 196613, 393241, 786433, 1572869, 3145739, 6291469,
@@ -12,11 +12,11 @@ public class HashTable<K, V> {
     private static final int upperTol = 10;
     private static final int lowerTol = 2;
     private int capacityIndex = 7;
-    // æœµØÖ··¨£¬separate Chaining
-    // Ã¿‚€µØÖ·´æÒ»‚€²éÕÒ±í£¬²éÕÒ±í¿ÉÒÔÊÇæœ½Ó´®ÁĞ£¬Ò²¿ÉÒÔÊÇÆ½ºâ˜ä
+    // éˆåœ°å€æ³•ï¼Œseparate Chaining
+    // æ¯å€‹åœ°å€å­˜ä¸€å€‹æŸ¥æ‰¾è¡¨ï¼ŒæŸ¥æ‰¾è¡¨å¯ä»¥æ˜¯éˆæ¥ä¸²åˆ—ï¼Œä¹Ÿå¯ä»¥æ˜¯å¹³è¡¡æ¨¹
     private TreeMap<K, V>[] hashTable;
     private int size;
-    private int M; // µØÖ·¿Õég
+    private int M; // åœ°å€ç©ºé–“
     public HashTable() {
         this.M = capacity[capacityIndex];
         hashTable = new TreeMap[M];
@@ -26,7 +26,7 @@ public class HashTable<K, V> {
     }
 
     private int hash(K key) {
-        return (key.hashCode() & 0x7fffffff) % M; // hashº¯”µÇóµÃË÷ÒıÖµ£¬& 0x7fffffff¾ÍÊÇÈ¡½^Œ¦Öµ
+        return (key.hashCode() & 0x7fffffff) % M; // hashå‡½æ•¸æ±‚å¾—ç´¢å¼•å€¼ï¼Œ& 0x7fffffffå°±æ˜¯å–çµ•å°å€¼
     }
     public int getSize() {
         return size;
@@ -55,7 +55,7 @@ public class HashTable<K, V> {
         for(int i = 0; i < oldM; i++) {
             TreeMap<K, V> map = hashTable[i];
             for(K key : map.keySet()) {
-                newHashTable[hash(key)].put(key, map.get(key)); // ÄÅfhashTableÃ¿‚€Ë÷ÒıµØÖ·ÖĞÈ¡³öÃ¿‚€Æ½ºâ˜äÖĞµÄÔªËØ
+                newHashTable[hash(key)].put(key, map.get(key)); // å¾èˆŠhashTableæ¯å€‹ç´¢å¼•åœ°å€ä¸­å–å‡ºæ¯å€‹å¹³è¡¡æ¨¹ä¸­çš„å…ƒç´ 
             }
         }
         this.hashTable = newHashTable;

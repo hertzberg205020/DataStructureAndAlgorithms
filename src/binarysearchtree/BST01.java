@@ -28,7 +28,7 @@ public class BST01<E extends Comparable<E>> {
     public void add(E e) {
         root = add(root, e);
     }
-    // ÏòÒÔnodeé¸ùµÄ¶ş·ÖËÑË÷˜äÖĞ²åÈëÔªËØe
+    // å‘ä»¥nodeç‚ºæ ¹çš„äºŒåˆ†æœç´¢æ¨¹ä¸­æ’å…¥å…ƒç´ e
     private Node add(Node node, E e) {
         if(node == null) {
             size++;
@@ -195,8 +195,8 @@ public class BST01<E extends Comparable<E>> {
         root = removeMin(root);
         return ret;
     }
-    // „h³ıµôÒÔnodeé¸ùµÄ¶ş·ÖËÑË÷˜äÖĞµÄ×îĞ¡¹üc
-    // ·µ»Ø„h³ı¹ücááĞÂµÄ¶ş·ÖËÑË÷˜äµÄ¸ù
+    // åˆªé™¤æ‰ä»¥nodeç‚ºæ ¹çš„äºŒåˆ†æœç´¢æ¨¹ä¸­çš„æœ€å°ç¯€é»
+    // è¿”å›åˆªé™¤ç¯€é»å¾Œæ–°çš„äºŒåˆ†æœç´¢æ¨¹çš„æ ¹
     private Node removeMin(Node node) {
         if(node.left == null) {
             Node rightNode = node.right;

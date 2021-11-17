@@ -1,11 +1,11 @@
 package substring_match;
 
-// ±©Á¦·¨•þ³¬•r
+// æš´åŠ›æ³•æœƒè¶…æ™‚
 
 public class LC1392Solution {
     public String longestPrefix(String s) {
         // s[0...len-1], s[s.length - len...s.length-1]
-        // Ç°¾Y×Ö×ÖéLlen
+        // å‰ç¶´å­—å­—é•·len
         for(int len = s.length() - 1; len >= 1; len--) {
             if(equal(s, 0, len - 1, s.length() - len, s.length()-1)) {
                 return s.substring(0, len);
