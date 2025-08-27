@@ -16,18 +16,18 @@ public class MaxHeap<E extends Comparable<? super E>> {
     public boolean isEmpty() {
         return data.isEmpty();
     }
-    // 返回完全二叉樹的數組表示中，一索引所表示的元素所對應父親節點的索引
+    // 返回完全二元樹的陣列表示中，一索引所表示的元素所對應父親節點的索引
     private int parent(int index) {
         if (index == 0) {
             throw new IllegalArgumentException("index-0 doesn't have parent.");
         }
         return (index - 1) / 2;
     }
-    // 返回完全二叉樹的數組表示中，一索引所表示的元素的左孩子節點的索引
+    // 返回完全二元樹的陣列表示中，一索引所表示的元素的左孩子節點的索引
     private int leftChild(int index) {
         return index * 2 + 1;
     }
-    // 返回完全二叉樹的數組表示中，一索引所表示的元素的右孩子節點的索引
+    // 返回完全二元樹的陣列表示中，一索引所表示的元素的右孩子節點的索引
     private int rightChild(int index) {
         return index * 2 + 2;
     }
